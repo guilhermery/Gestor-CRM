@@ -1,0 +1,13 @@
+<h1>Adicione um cliente:</h1>
+<form action="{% url 'ver_clientes' %}" method="POST">
+    {% csrf_token %}
+    <input type="text" name="nome" placeholder="Digite o nome">
+    <br><br>
+    <input type="number" name="idade" placeholder="Digite a idade">
+    <br><br>
+    <input type="tel" name="telefone" placeholder="Digite o telefone">
+    <br><br>
+    <input type="email" name="email" placeholder="Digite o email">
+    <br><br>
+    <input type="submit" value="Enviar">
+</form>

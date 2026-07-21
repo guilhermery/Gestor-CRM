@@ -1,0 +1,11 @@
+
+<h1>Clientes cadastrados</h1>
+{% for cliente in clientes %}
+    <p>{{cliente.nome}}</p>
+    <p>{{cliente.email}}</p>
+    <p>
+        <a href="{% url 'detalhes' %}">[Ver]</a>
+        <a href="{% url 'editar' %}">[Editar]</a>
+        <a href="{% url 'excluir' %}">[Excluir]</a>
+    </p>
+{% endfor %}

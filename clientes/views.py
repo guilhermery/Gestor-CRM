@@ -2,11 +2,24 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Cliente
 
-# Create your views here.
-def listar_clientes(request):
+def clientes(request):
+    clientes = Cliente.objects.all()
+    return render(request, 'clientes/ver_clientes.html', {'clientes': clientes})
+        
+def detalhes_cliente(request):
+    pass
+
+def editar_cliente(request):
+    pass
+
+def excluir_cliente(request):
+    pass
+
+
+def verificar_clientes(request):
     if request.method == "GET":
-        nome = 'Guilherme'
-        return render(request, 'listar_clientes.html', {'nome': nome})
+        clientes = Cliente.objects.all()
+        return render(request, 'clientes/listar_clientes.html', {'clientes': clientes})
     elif request.method == "POST":
         nome = request.POST.get('nome')
         idade = request.POST.get('idade')
@@ -21,4 +34,4 @@ def listar_clientes(request):
             return HttpResponse("Usuario cadastrado")
 
 def adicionar_cliente(request):
-     return render(request, 'adicionar_clientes.html')
+     return render(request, 'clientes/adicionar_clientes.html')

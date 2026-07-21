@@ -1,5 +1,5 @@
 <h1>Adicione um cliente:</h1>
-<form action="{% url 'ver_clientes' %}" method="POST">
+<form action="{% url 'verificar_clientes' %}" method="POST">
     {% csrf_token %}
     <input type="text" name="nome" placeholder="Digite o nome">
     <br><br>

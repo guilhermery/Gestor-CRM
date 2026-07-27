@@ -1,5 +1,5 @@
 <h1>Adicionar cliente</h1>
-<form action="{% url 'novo' %}" method="POST">
+<form action="{% url 'clientes:novo' %}" method="POST">
     {% csrf_token %}
     <p>
         <label for="nome">Nome:</label>
@@ -23,4 +23,4 @@
 
     <button type="submit">Cadastrar cliente</button>
 </form>
-<a href="{% url 'clientes' %}">Voltar para clientes</a>
+<a href="{% url 'clientes:clientes' %}">Voltar para clientes</a>

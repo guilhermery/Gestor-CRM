@@ -1,6 +1,6 @@
 <h1>Clientes cadastrados</h1>
 
-<a href="{% url 'novo' %}">Adicionar novo cliente</a>
+<a href="{% url 'clientes:novo' %}">Adicionar novo cliente</a>
 <hr>
 
 {% for cliente in clientes %}
@@ -11,11 +11,11 @@
         <p>Idade: {{ cliente.idade }}</p>
         <p>Telefone: {{ cliente.telefone }}</p>
 
-        <a href="{% url 'detalhes' cliente.id %}">Ver detalhes</a>
+        <a href="{% url 'clientes:detalhes' cliente.id %}">Ver detalhes</a>
         
-        <a href="{% url 'editar' cliente.id %}">Editar</a>
+        <a href="{% url 'clientes:editar' cliente.id %}">Editar</a>
 
-        <a href="{% url 'excluir' cliente.id %}"
+        <a href="{% url 'clientes:excluir' cliente.id %}"
            onclick="return confirm('Tem certeza que deseja excluir {{ cliente.nome }}?');">
             Excluir
         </a>

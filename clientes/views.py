@@ -18,13 +18,13 @@ def editar_cliente(request, cliente_id):
         cliente.telefone = request.POST.get('telefone')
         cliente.email = request.POST.get('email')
         cliente.save()
-        return redirect('detalhes', cliente.id)
+        return redirect('clientes:detalhes', cliente.id)
     return render(request, 'clientes/editar_cliente.html', {'cliente': cliente})
 
 def excluir_cliente(request, cliente_id):
     cliente = Cliente.objects.get(id = cliente_id)
     cliente.delete()
-    return redirect('clientes')
+    return redirect('clientes:clientes')
 
 def adicionar_cliente(request):
     if request.method == 'POST':
@@ -38,5 +38,5 @@ def adicionar_cliente(request):
             telefone=telefone,
             email=email
         )
-        return redirect('clientes')
+        return redirect('clientes:clientes')
     return render(request, 'clientes/adicionar_clientes.html')

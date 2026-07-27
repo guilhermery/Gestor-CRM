@@ -1,0 +1,27 @@
+<h1>Produtos cadastrados</h1>
+
+<a href="">Adicionar novo produto</a>
+<hr>
+
+{% for produto in produtos %}
+    <div>
+        <h2>{{ produto.nome }}</h2>
+
+        <p>Descrição: {{ produto.descricao }}</p>
+        <p>Preço: {{ produto.preco }}</p>
+        <p>Quantidade em estoque: {{ produto.quantidade }}</p>
+        <p>Data de cadastro: {{ produto.data_cadastro }}</p>
+
+        <a href="">Ver detalhes</a>
+        
+        <a href="">Editar</a>
+
+        <a href=""
+           onclick="return confirm('Tem certeza que deseja excluir {{ produto.nome }}?');">
+            Excluir
+        </a>
+    </div>
+    <hr>
+{% empty %}
+    <p>Nenhum produto cadastrado.</p>
+{% endfor %}

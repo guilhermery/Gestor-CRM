@@ -1,0 +1,14 @@
+<h1>Detalhes do produto</h1>
+<h2>{{ produto.nome }}</h2>
+<p><strong>Descrição:</strong> {{ produto.descricao }}</p>
+<p><strong>Preço:</strong> {{ produto.preco }}</p>
+<p><strong>Quantidade em estoque:</strong> {{ produto.quantidade }}</p>
+<hr>
+<br>
+<a href="{}">Editar produto</a>
+<a href="{}"
+   onclick="return confirm('Tem certeza que deseja excluir {{ produto.nome }}?');">
+    Excluir produto
+</a>
+<br><br>
+<a href="{% url 'produtos:produtos' %}">Voltar para lista de produtos</a>

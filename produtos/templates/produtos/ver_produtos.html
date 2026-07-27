@@ -1,6 +1,6 @@
 <h1>Produtos cadastrados</h1>
 
-<a href="">Adicionar novo produto</a>
+<a href="{% url 'produtos:novo' %}">Adicionar novo produto</a>
 <hr>
 
 {% for produto in produtos %}
@@ -12,7 +12,7 @@
         <p>Quantidade em estoque: {{ produto.quantidade }}</p>
         <p>Data de cadastro: {{ produto.data_cadastro }}</p>
 
-        <a href="">Ver detalhes</a>
+        <a href="{% url 'produtos:detalhes' produto.id %}">Ver detalhes</a>
         
         <a href="">Editar</a>
 

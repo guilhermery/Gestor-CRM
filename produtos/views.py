@@ -22,6 +22,6 @@ def adicionar_produto(request):
         return redirect('produtos')
     return render(request, 'produtos/adicionar_produtos.html')
 
-def detalhes_produto(request):
-    produtos = Produto.objects.all()
-    return render(request, 'detalhes_produto.html', {'produtos': produtos})
+def detalhes_produto(request, produto_id):
+    produto = Produto.objects.get(id = produto_id)
+    return render(request, 'produtos/detalhes_produto.html', {'produto': produto})

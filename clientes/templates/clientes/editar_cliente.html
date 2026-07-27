@@ -1,0 +1,23 @@
+<h1>Editar cliente</h1>
+<form method="POST">
+    {% csrf_token %}
+    <p><label>Nome:</label>
+        <input type="text" name="nome" value="{{ cliente.nome }}">
+    </p>
+    
+    <p><label>Idade:</label>
+        <input type="number" name="idade" value="{{ cliente.idade }}">
+    </p>
+    
+    <p><label>Telefone:</label> 
+        <input type="tel" name="telefone" value="{{ cliente.telefone }}">
+    </p>
+    
+    <p><label>Email:</label>
+        <input type="email" name="email" value="{{ cliente.email }}">
+    </p>
+    
+    <button type="submit"> Salvar alterações </button>
+    
+    <a href="{% url 'detalhes' cliente.id %}"> Cancelar </a>
+</form>

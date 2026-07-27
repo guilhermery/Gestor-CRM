@@ -1,13 +1,26 @@
-<h1>Adicione um cliente:</h1>
-<form action="{% url 'verificar_clientes' %}" method="POST">
+<h1>Adicionar cliente</h1>
+<form action="{% url 'novo' %}" method="POST">
     {% csrf_token %}
-    <input type="text" name="nome" placeholder="Digite o nome">
-    <br><br>
-    <input type="number" name="idade" placeholder="Digite a idade">
-    <br><br>
-    <input type="tel" name="telefone" placeholder="Digite o telefone">
-    <br><br>
-    <input type="email" name="email" placeholder="Digite o email">
-    <br><br>
-    <input type="submit" value="Enviar">
+    <p>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" placeholder="Digite o nome" required>
+    </p>
+
+    <p>
+        <label for="idade">Idade:</label>
+        <input type="number" id="idade" name="idade" placeholder="Digite a idade" required>
+    </p>
+
+    <p>
+        <label for="telefone">Telefone:</label>
+        <input type="tel" id="telefone" name="telefone" placeholder="Digite o telefone" required>
+    </p>
+
+    <p>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Digite o email" required>
+    </p>
+
+    <button type="submit">Cadastrar cliente</button>
 </form>
+<a href="{% url 'clientes' %}">Voltar para clientes</a>

@@ -1,0 +1,31 @@
+<h1>Detalhes do cliente</h1>
+<h2>{{ cliente.nome }}</h2>
+<p><strong>Email:</strong> {{ cliente.email }}</p>
+<p><strong>Telefone:</strong> {{ cliente.telefone }}</p>
+<p><strong>Idade:</strong> {{ cliente.idade }}</p>
+<hr>
+<h2>Histórico de compras</h2>
+{% if compras %}
+    {% for compra in compras %}
+        <div>
+            <p><strong>Data:</strong> {{ compra.data }}</p>
+            <p><strong>Valor:</strong> R$ {{ compra.valor_total }}</p>
+
+            <a href="{% url 'detalhes_venda' compra.id %}">
+                Ver detalhes da compra
+            </a>
+        </div>
+
+        <hr>
+    {% endfor %}
+{% else %}
+<p>Este cliente ainda não possui compras.</p>
+{% endif %}
+<br>
+<a href="{% url 'editar' cliente.id %}">Editar cliente</a>
+<a href="{% url 'excluir' cliente.id %}"
+   onclick="return confirm('Tem certeza que deseja excluir {{ cliente.nome }}?');">
+    Excluir cliente
+</a>
+<br><br>
+<a href="{% url 'clientes' %}">Voltar para lista de clientes</a>

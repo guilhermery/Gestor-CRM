@@ -1,11 +1,26 @@
-
 <h1>Clientes cadastrados</h1>
+
+<a href="{% url 'novo' %}">Adicionar novo cliente</a>
+<hr>
+
 {% for cliente in clientes %}
-    <p>{{cliente.nome}}</p>
-    <p>{{cliente.email}}</p>
-    <p>
-        <a href="{% url 'detalhes' %}">[Ver]</a>
-        <a href="{% url 'editar' %}">[Editar]</a>
-        <a href="{% url 'excluir' %}">[Excluir]</a>
-    </p>
+    <div>
+        <h2>{{ cliente.nome }}</h2>
+
+        <p>Email: {{ cliente.email }}</p>
+        <p>Idade: {{ cliente.idade }}</p>
+        <p>Telefone: {{ cliente.telefone }}</p>
+
+        <a href="{% url 'detalhes' cliente.id %}">Ver detalhes</a>
+        
+        <a href="{% url 'editar' cliente.id %}">Editar</a>
+
+        <a href="{% url 'excluir' cliente.id %}"
+           onclick="return confirm('Tem certeza que deseja excluir {{ cliente.nome }}?');">
+            Excluir
+        </a>
+    </div>
+    <hr>
+{% empty %}
+    <p>Nenhum cliente cadastrado.</p>
 {% endfor %}

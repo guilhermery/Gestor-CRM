@@ -14,9 +14,9 @@
 
         <a href="{% url 'produtos:detalhes' produto.id %}">Ver detalhes</a>
         
-        <a href="">Editar</a>
+        <a href="{% url 'produtos:editar' produto.id %}">Editar</a>
 
-        <a href=""
+        <a href="{% url 'produtos:excluir' produto.id %}"
            onclick="return confirm('Tem certeza que deseja excluir {{ produto.nome }}?');">
             Excluir
         </a>

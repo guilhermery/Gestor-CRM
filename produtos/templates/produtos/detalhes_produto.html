@@ -13,6 +13,24 @@
 <p><strong>Data de cadastro:</strong> {{ produto.data_cadastro|date:"d/m/Y H:i" }}</p>
 <hr>
 <br>
+<h2>Histórico de vendas</h2>
+{% for venda in vendas %}
+    <p>
+        Cliente: {{ venda.cliente.nome }}
+    </p>
+    <p>
+        Quantidade: {{ venda.quantidade }}
+    </p>
+    <p>
+        Valor: R$ {{ venda.valor_total }}
+    </p>
+    <p>
+        Data: {{ venda.data_venda }}
+    </p>
+    <hr>
+{% empty %}
+<p>Este produto ainda não foi vendido.</p>
+{% endfor %}
 <a href="{% url 'produtos:editar' produto.id %}">Editar produto</a>
 <a href="{% url 'produtos:excluir' produto.id %}"
    onclick="return confirm('Tem certeza que deseja excluir {{ produto.nome }}?');">

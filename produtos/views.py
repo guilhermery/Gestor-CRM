@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Produto
+from vendas.models import Venda
 
 def produtos(request):
     produtos = Produto.objects.all()
     return render(request, 'produtos/ver_produtos.html', {'produtos': produtos})
 
 def adicionar_produto(request):
-    produtos = Produto.objects.all()
     if request.method == 'POST':
         nome = request.POST.get('nome')
         descricao = request.POST.get('descricao')
@@ -35,7 +35,8 @@ def editar_produto(request, produto_id):
 
 def detalhes_produto(request, produto_id):
     produto = Produto.objects.get(id = produto_id)
-    return render(request, 'produtos/detalhes_produto.html', {'produto': produto})
+    vendas = Venda.objects.filter(produto=produto)
+    return render(request, 'produtos/detalhes_produto.html', {'produto': produto, 'vendas': vendas})
 
 def excluir_produto(request, produto_id):
     produto = Produto.objects.get(id = produto_id)

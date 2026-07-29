@@ -1,0 +1,31 @@
+<h1>Registrar venda</h1>
+
+<form action="{% url 'vendas:novo' %}" method="POST">
+    {% csrf_token %}
+    <p>
+        <label>Cliente:</label>
+        <select name="cliente">
+            {% for cliente in clientes %}
+                <option value="{{ cliente.id }}">{{ cliente.nome }}</option>
+            {% endfor %}
+        </select>
+    </p>
+
+    <p>
+        <label>Produto:</label>
+        <select name="produto">
+            {% for produto in produtos %}
+                <option value="{{ produto.id }}">{{ produto.nome }}</option>
+            {% endfor %}
+        </select>
+    </p>
+
+    <p>
+        <label>Quantidade:</label>
+        <input type="number" name="quantidade" min="1" required>
+    </p>
+
+    <button type="submit">Registrar venda</button>
+</form>
+<br>
+<a href="{% url 'vendas:vendas' %}">Voltar</a>

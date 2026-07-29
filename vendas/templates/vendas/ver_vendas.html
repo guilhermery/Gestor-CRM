@@ -1,0 +1,33 @@
+<h1>Vendas realizadas</h1>
+
+<a href="{}">Registrar nova venda</a>
+
+<hr>
+
+{% for venda in vendas %}
+    <div>
+        <h2>Venda #{{ venda.id }}</h2>
+
+        <p>Cliente: {{ venda.cliente.nome }}</p>
+        <p>Produto: {{ venda.produto.nome }}</p>
+        <p>Quantidade: {{ venda.quantidade }}</p>
+        <p>Valor total: R$ {{ venda.valor_total }}</p>
+        <p>Data: {{ venda.data_venda }}</p>
+
+        <a href="{}">
+            Ver detalhes
+        </a>
+
+        <a href="{}"
+           onclick="return confirm('Deseja excluir esta venda?');">
+            Excluir
+        </a>
+    </div>
+
+    <hr>
+
+{% empty %}
+
+<p>Nenhuma venda registrada.</p>
+
+{% endfor %}

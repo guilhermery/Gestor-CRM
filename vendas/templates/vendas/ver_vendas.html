@@ -11,7 +11,7 @@
         <p>Cliente: {{ venda.cliente.nome }}</p>
         <p>Produto: {{ venda.produto.nome }}</p>
         <p>Quantidade: {{ venda.quantidade }}</p>
-        <p>Valor total: R$ {{ venda.valor_total }}</p>
+        <p>Valor total: R$ {{ venda.valor_total|floatformat:2 }}</p>
         <p>Data: {{ venda.data_venda|date:"d/m/Y H:i" }}</p>
 
         <a href="{}">

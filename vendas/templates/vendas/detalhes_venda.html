@@ -8,7 +8,7 @@
 
 <p><strong>Quantidade:</strong> {{ venda.quantidade }}</p>
 
-<p><strong>Valor total:</strong> R$ {{ venda.valor_total }}</p>
+<p><strong>Valor total:</strong> R$ {{ venda.valor_total|floatformat:2 }}</p>
 
 <p><strong>Data:</strong> {{ venda.data_venda|date:"d/m/Y H:i" }}</p>
 

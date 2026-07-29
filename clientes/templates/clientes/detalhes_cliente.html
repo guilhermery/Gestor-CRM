@@ -8,8 +8,8 @@
 {% if compras %}
     {% for compra in compras %}
         <div>
-            <p><strong>Data:</strong> {{ compra.data }}</p>
-            <p><strong>Valor:</strong> R$ {{ compra.valor_total }}</p>
+            <p><strong>Data:</strong> {{ compra.data|date:"d/m/Y H:i" }}</p>
+            <p><strong>Valor:</strong> R$ {{ compra.valor_total|floatformat:2 }}</p>
 
             <a href="{% url 'vendas:detalhes' compra.id %}">
                 Ver detalhes da compra

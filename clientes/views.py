@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from vendas.models import Venda
 from .models import Cliente
 
 def clientes(request):
@@ -7,7 +8,8 @@ def clientes(request):
         
 def detalhes_cliente(request, cliente_id):
     cliente = Cliente.objects.get(id = cliente_id)
-    return render(request, 'clientes/detalhes_cliente.html', {'cliente': cliente})
+    compras = Venda.objects.filter(cliente=cliente)
+    return render(request, 'clientes/detalhes_cliente.html', {'cliente': cliente, 'compras':compras})
 
 def editar_cliente(request, cliente_id):
     cliente = Cliente.objects.get(id=cliente_id)

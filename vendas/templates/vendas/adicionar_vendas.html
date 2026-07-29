@@ -1,5 +1,7 @@
 <h1>Registrar venda</h1>
-
+{% if erro %}
+    <p><strong>{{ erro }}</strong></p>
+{% endif %}
 <form action="{% url 'vendas:novo' %}" method="POST">
     {% csrf_token %}
     <p>

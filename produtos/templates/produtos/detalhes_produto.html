@@ -1,8 +1,16 @@
 <h1>Detalhes do produto</h1>
 <h2>{{ produto.nome }}</h2>
 <p><strong>Descrição:</strong> {{ produto.descricao }}</p>
-<p><strong>Preço:</strong> {{ produto.preco }}</p>
+<p><strong>Preço:</strong> {{ produto.preco|floatformat:2 }}</p>
 <p><strong>Quantidade em estoque:</strong> {{ produto.quantidade }}</p>
+{% if produto.quantidade == 0 %}
+    <p><strong>❌ Produto sem estoque.</strong></p>
+{% elif produto.quantidade <= 5 %}
+    <p><strong>⚠️ Estoque baixo.</strong></p>
+{% else %}
+    <p><strong>✅ Estoque disponível.</strong></p>
+{% endif %}
+<p><strong>Data de cadastro:</strong> {{ produto.data_cadastro|date:"d/m/Y H:i" }}</p>
 <hr>
 <br>
 <a href="{% url 'produtos:editar' produto.id %}">Editar produto</a>

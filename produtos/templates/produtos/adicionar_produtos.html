@@ -13,12 +13,12 @@
 
     <p>
         <label for="preco">Preço:</label>
-        <input type="number" id="preco" name="preco" placeholder="Digite o preço" required>
+        <input type="number" id="preco" name="preco" step="0.01" min="0" placeholder="Digite o preço" required>
     </p>
 
     <p>
         <label for="quantidade">Quantidade:</label>
-        <input type="number" id="quantidade" name="quantidade" placeholder="Digite o estoque" required>
+        <input type="number" id="quantidade" name="quantidade" min="0" placeholder="Digite o estoque" required>
     </p>
 
     <button type="submit">Cadastrar produto</button>

@@ -3,7 +3,7 @@ from vendas.models import Venda
 from .models import Cliente
 
 def clientes(request):
-    clientes = Cliente.objects.all()
+    clientes = Cliente.objects.all().order_by("nome")
     return render(request, 'clientes/ver_clientes.html', {'clientes': clientes})
         
 def detalhes_cliente(request, cliente_id):

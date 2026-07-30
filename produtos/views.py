@@ -4,7 +4,7 @@ from .models import Produto
 from vendas.models import Venda
 
 def produtos(request):
-    produtos = Produto.objects.all()
+    produtos = Produto.objects.all().order_by("quantidade")
     return render(request, 'produtos/ver_produtos.html', {'produtos': produtos})
 
 def adicionar_produto(request):
@@ -35,7 +35,7 @@ def editar_produto(request, produto_id):
 
 def detalhes_produto(request, produto_id):
     produto = Produto.objects.get(id = produto_id)
-    vendas = Venda.objects.filter(produto=produto)
+    vendas = Venda.objects.filter(produto = produto)
     return render(request, 'produtos/detalhes_produto.html', {'produto': produto, 'vendas': vendas})
 
 def excluir_produto(request, produto_id):

@@ -2,8 +2,15 @@ from django.shortcuts import render, redirect
 from .models import Venda, Produto, Cliente
 
 def vendas(request):
-    vendas = Venda.objects.all()
-    return render(request, 'vendas/ver_vendas.html', {'vendas':vendas})
+    vendas = Venda.objects.all().order_by("-data_venda")
+    total_vendas = vendas.count()
+    itens_vendidos = 0
+    faturamento = 0
+    for venda in vendas:
+        itens_vendidos += venda.quantidade
+        faturamento += venda.valor_total
+    context = {'vendas': vendas, 'total_vendas': total_vendas, 'itens_vendidos': itens_vendidos, 'faturamento': faturamento}
+    return render(request, 'vendas/ver_vendas.html', context)
 
 def adicionar_venda(request):
     clientes = Cliente.objects.all()
@@ -33,7 +40,7 @@ def adicionar_venda(request):
 
 def detalhes_venda(request, venda_id):
     venda = Venda.objects.get(id = venda_id)
-    return render(request, 'vendas/detalhes_venda', {'venda':venda})
+    return render(request, 'vendas/detalhes_venda.html', {'venda':venda})
 
 def excluir_venda(request, venda_id):
     venda = Venda.objects.get(id = venda_id)

@@ -1,40 +1,130 @@
-<h1>Detalhes do produto</h1>
-<h2>{{ produto.nome }}</h2>
-<p><strong>Descrição:</strong> {{ produto.descricao }}</p>
-<p><strong>Preço:</strong> {{ produto.preco|floatformat:2 }}</p>
-<p><strong>Quantidade em estoque:</strong> {{ produto.quantidade }}</p>
-{% if produto.quantidade == 0 %}
-    <p><strong>❌ Produto sem estoque.</strong></p>
-{% elif produto.quantidade <= 5 %}
-    <p><strong>⚠️ Estoque baixo.</strong></p>
-{% else %}
-    <p><strong>✅ Estoque disponível.</strong></p>
-{% endif %}
-<p><strong>Data de cadastro:</strong> {{ produto.data_cadastro|date:"d/m/Y H:i" }}</p>
-<hr>
-<br>
-<h2>Histórico de vendas</h2>
-{% for venda in vendas %}
-    <p>
-        Cliente: {{ venda.cliente.nome }}
-    </p>
-    <p>
-        Quantidade: {{ venda.quantidade }}
-    </p>
-    <p>
-        Valor: R$ {{ venda.valor_total|floatformat:2 }}
-    </p>
-    <p>
-        Data: {{ venda.data_venda|date:"d/m/Y H:i }}
-    </p>
-    <hr>
-{% empty %}
-<p>Este produto ainda não foi vendido.</p>
-{% endfor %}
-<a href="{% url 'produtos:editar' produto.id %}">Editar produto</a>
-<a href="{% url 'produtos:excluir' produto.id %}"
-   onclick="return confirm('Tem certeza que deseja excluir {{ produto.nome }}?');">
-    Excluir produto
-</a>
-<br><br>
-<a href="{% url 'produtos:produtos' %}">Voltar para lista de produtos</a>
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class="card shadow-sm mb-4">
+
+    <div class="card-header bg-primary text-white">
+
+        <h3 class="mb-0">{{ produto.nome }}</h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <p><strong>Descrição:</strong> {{ produto.descricao }}</p>
+
+        <p><strong>Preço:</strong> R$ {{ produto.preco|floatformat:2 }}</p>
+
+        <p><strong>Quantidade:</strong> {{ produto.quantidade }}</p>
+
+        <p><strong>Cadastro:</strong> {{ produto.data_cadastro|date:"d/m/Y H:i" }}</p>
+
+        {% if produto.quantidade == 0 %}
+
+            <span class="badge bg-danger">
+                Produto sem estoque
+            </span>
+
+        {% elif produto.quantidade <= 5 %}
+
+            <span class="badge bg-warning text-dark">
+                Estoque baixo
+            </span>
+
+        {% else %}
+
+            <span class="badge bg-success">
+                Estoque disponível
+            </span>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+<div class="card shadow-sm">
+
+    <div class="card-header">
+
+        <strong>Histórico de Vendas</strong>
+
+    </div>
+
+    <div class="card-body">
+
+    {% if vendas %}
+
+        <table class="table table-striped">
+
+            <thead>
+
+                <tr>
+
+                    <th>Cliente</th>
+                    <th>Quantidade</th>
+                    <th>Valor</th>
+                    <th>Data</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for venda in vendas %}
+
+                <tr>
+
+                    <td>{{ venda.cliente.nome }}</td>
+
+                    <td>{{ venda.quantidade }}</td>
+
+                    <td>R$ {{ venda.valor_total|floatformat:2 }}</td>
+
+                    <td>{{ venda.data_venda|date:"d/m/Y H:i" }}</td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    {% else %}
+
+        <div class="alert alert-info">
+
+            Este produto ainda não foi vendido.
+
+        </div>
+
+    {% endif %}
+
+    </div>
+
+</div>
+
+<div class="mt-4">
+
+    <a class="btn btn-warning"
+       href="{% url 'produtos:editar' produto.id %}">
+        Editar
+    </a>
+
+    <a class="btn btn-danger"
+       href="{% url 'produtos:excluir' produto.id %}"
+       onclick="return confirm('Tem certeza que deseja excluir {{ produto.nome }}?');">
+        Excluir
+    </a>
+
+    <a class="btn btn-secondary"
+       href="{% url 'produtos:produtos' %}">
+        Voltar
+    </a>
+
+</div>
+
+{% endblock %}

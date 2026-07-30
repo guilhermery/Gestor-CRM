@@ -1,24 +1,90 @@
-<h1>Detalhes da venda</h1>
+{% extends 'core/base.html' %}
 
-<h2>Venda #{{ venda.id }}</h2>
+{% block content %}
 
-<p><strong>Cliente:</strong> {{ venda.cliente.nome }}</p>
+<div class="card shadow-sm">
 
-<p><strong>Produto:</strong> {{ venda.produto.nome }}</p>
+    <div class="card-header bg-primary text-white">
 
-<p><strong>Quantidade:</strong> {{ venda.quantidade }}</p>
+        <h3 class="mb-0">
 
-<p><strong>Valor total:</strong> R$ {{ venda.valor_total|floatformat:2 }}</p>
+            Venda #{{ venda.id }}
 
-<p><strong>Data:</strong> {{ venda.data_venda|date:"d/m/Y H:i" }}</p>
+        </h3>
 
-<hr>
+    </div>
 
-<a href="{% url 'vendas:excluir' venda.id %}"
-   onclick="return confirm('Deseja excluir esta venda?');">
-    Excluir venda
-</a>
+    <div class="card-body">
 
-<br><br>
+        <p>
 
-<a href="{% url 'vendas:vendas' %}">Voltar para lista</a>
+            <strong>Cliente:</strong>
+
+            {{ venda.cliente.nome }}
+
+        </p>
+
+        <p>
+
+            <strong>Produto:</strong>
+
+            {{ venda.produto.nome }}
+
+        </p>
+
+        <p>
+
+            <strong>Quantidade:</strong>
+
+            <span class="badge bg-primary">
+
+                {{ venda.quantidade }}
+
+            </span>
+
+        </p>
+
+        <p>
+
+            <strong>Valor Total:</strong>
+
+            <span class="text-success fw-bold">
+
+                R$ {{ venda.valor_total|floatformat:2 }}
+
+            </span>
+
+        </p>
+
+        <p>
+
+            <strong>Data:</strong>
+
+            {{ venda.data_venda|date:"d/m/Y H:i" }}
+
+        </p>
+
+    </div>
+
+</div>
+
+<div class="mt-4">
+
+    <a class="btn btn-danger"
+       href="{% url 'vendas:excluir' venda.id %}"
+       onclick="return confirm('Deseja excluir esta venda?');">
+
+        Excluir
+
+    </a>
+
+    <a class="btn btn-secondary"
+       href="{% url 'vendas:vendas' %}">
+
+        Voltar
+
+    </a>
+
+</div>
+
+{% endblock %}

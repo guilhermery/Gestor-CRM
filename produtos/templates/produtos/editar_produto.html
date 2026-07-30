@@ -1,23 +1,70 @@
-<h1>Editar produto</h1>
-<form method="POST">
-    {% csrf_token %}
-    <p><label>Nome:</label>
-        <input type="text" name="nome" value="{{ produto.nome }}">
-    </p>
-    
-    <p><label>Descrição:</label>
-        <input type="text" name="descricao" value="{{ produto.descricao }}">
-    </p>
-    
-    <p><label>Preço: R$</label> 
-        <input type="number" name="preco" step="0.01" min="0" value="{{ produto.preco|floatformat:2 }}">
-    </p>
-    
-    <p><label>Quantidade em estoque:</label>
-        <input type="number" name="quantidade" min="0" value="{{ produto.quantidade }}">
-    </p>
-    
-    <button type="submit"> Salvar alterações </button>
-    
-    <a href="{% url 'produtos:detalhes' produto.id %}"> Cancelar </a>
-</form>
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class="card shadow-sm">
+
+    <div class="card-header bg-warning">
+
+        <h3 class="mb-0">Editar Produto</h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label">Nome</label>
+                <input class="form-control"
+                       type="text"
+                       name="nome"
+                       value="{{ produto.nome }}">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Descrição</label>
+                <textarea class="form-control"
+                          rows="3"
+                          name="descricao">{{ produto.descricao }}</textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Preço</label>
+                <input class="form-control"
+                       type="number"
+                       step="0.01"
+                       min="0"
+                       name="preco"
+                       value="{{ produto.preco }}">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Quantidade</label>
+                <input class="form-control"
+                       type="number"
+                       min="0"
+                       name="quantidade"
+                       value="{{ produto.quantidade }}">
+            </div>
+
+            <button class="btn btn-warning">
+
+                Salvar Alterações
+
+            </button>
+
+            <a class="btn btn-secondary"
+               href="{% url 'produtos:detalhes' produto.id %}">
+                Cancelar
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

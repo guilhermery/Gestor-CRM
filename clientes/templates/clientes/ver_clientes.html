@@ -1,26 +1,77 @@
-<h1>Clientes cadastrados</h1>
+{% extends 'core/base.html' %}
 
-<a href="{% url 'clientes:novo' %}">Adicionar novo cliente</a>
-<hr>
+{% block content %}
 
-{% for cliente in clientes %}
-    <div>
-        <h2>{{ cliente.nome }}</h2>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Clientes</h1>
 
-        <p>Email: {{ cliente.email }}</p>
-        <p>Idade: {{ cliente.idade }}</p>
-        <p>Telefone: {{ cliente.telefone }}</p>
+    <a href="{% url 'clientes:novo' %}" class="btn btn-success">
+        Novo Cliente
+    </a>
+</div>
 
-        <a href="{% url 'clientes:detalhes' cliente.id %}">Ver detalhes</a>
-        
-        <a href="{% url 'clientes:editar' cliente.id %}">Editar</a>
+{% if clientes %}
 
-        <a href="{% url 'clientes:excluir' cliente.id %}"
-           onclick="return confirm('Tem certeza que deseja excluir {{ cliente.nome }}?');">
-            Excluir
-        </a>
-    </div>
-    <hr>
-{% empty %}
-    <p>Nenhum cliente cadastrado.</p>
-{% endfor %}
+<table class="table table-hover table-bordered align-middle">
+
+    <thead class="table-dark">
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>Idade</th>
+            <th width="250">Ações</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    {% for cliente in clientes %}
+
+        <tr>
+
+            <td>{{ cliente.nome }}</td>
+
+            <td>{{ cliente.email }}</td>
+
+            <td>{{ cliente.telefone }}</td>
+
+            <td>{{ cliente.idade }}</td>
+
+            <td>
+
+                <a class="btn btn-primary btn-sm"
+                   href="{% url 'clientes:detalhes' cliente.id %}">
+                    Ver
+                </a>
+
+                <a class="btn btn-warning btn-sm"
+                   href="{% url 'clientes:editar' cliente.id %}">
+                    Editar
+                </a>
+
+                <a class="btn btn-danger btn-sm"
+                   href="{% url 'clientes:excluir' cliente.id %}"
+                   onclick="return confirm('Tem certeza que deseja excluir {{ cliente.nome }}?');">
+                    Excluir
+                </a>
+
+            </td>
+
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% else %}
+
+<div class="alert alert-info">
+    Nenhum cliente cadastrado.
+</div>
+
+{% endif %}
+
+{% endblock %}

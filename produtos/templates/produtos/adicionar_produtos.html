@@ -1,26 +1,67 @@
-<h1>Adicionar produto</h1>
-<form action="{% url 'produtos:novo' %}" method="POST">
-    {% csrf_token %}
-    <p>
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" placeholder="Digite o nome" required>
-    </p>
+{% extends 'core/base.html' %}
 
-    <p>
-        <label for="descricao">Descrição:</label>
-        <input type="text" id="descricao" name="descricao" placeholder="Digite uma descrição" required>
-    </p>
+{% block content %}
 
-    <p>
-        <label for="preco">Preço:</label>
-        <input type="number" id="preco" name="preco" step="0.01" min="0" placeholder="Digite o preço" required>
-    </p>
+<div class="card shadow-sm">
 
-    <p>
-        <label for="quantidade">Quantidade:</label>
-        <input type="number" id="quantidade" name="quantidade" min="0" placeholder="Digite o estoque" required>
-    </p>
+    <div class="card-header bg-success text-white">
 
-    <button type="submit">Cadastrar produto</button>
-</form>
-<a href="{% url 'produtos:produtos' %}">Voltar para produtos</a>
+        <h3 class="mb-0">Adicionar Produto</h3>
+
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label">Nome</label>
+                <input class="form-control" type="text" name="nome" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Descrição</label>
+                <textarea class="form-control"
+                          rows="3"
+                          name="descricao"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Preço</label>
+                <input class="form-control"
+                       type="number"
+                       step="0.01"
+                       min="0"
+                       name="preco"
+                       required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Quantidade em estoque</label>
+                <input class="form-control"
+                       type="number"
+                       min="0"
+                       name="quantidade"
+                       required>
+            </div>
+
+            <button class="btn btn-success">
+
+                Cadastrar
+
+            </button>
+
+            <a class="btn btn-secondary"
+               href="{% url 'produtos:produtos' %}">
+                Voltar
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

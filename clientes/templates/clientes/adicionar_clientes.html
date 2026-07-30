@@ -1,26 +1,51 @@
-<h1>Adicionar cliente</h1>
-<form action="{% url 'clientes:novo' %}" method="POST">
-    {% csrf_token %}
-    <p>
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" placeholder="Digite o nome" required>
-    </p>
+{% extends 'core/base.html' %}
 
-    <p>
-        <label for="idade">Idade:</label>
-        <input type="number" id="idade" name="idade" placeholder="Digite a idade" required>
-    </p>
+{% block content %}
 
-    <p>
-        <label for="telefone">Telefone:</label>
-        <input type="tel" id="telefone" name="telefone" placeholder="Digite o telefone" required>
-    </p>
+<div class="card shadow-sm">
 
-    <p>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="Digite o email" required>
-    </p>
+    <div class="card-header bg-success text-white">
+        <h3 class="mb-0">Adicionar Cliente</h3>
+    </div>
 
-    <button type="submit">Cadastrar cliente</button>
-</form>
-<a href="{% url 'clientes:clientes' %}">Voltar para clientes</a>
+    <div class="card-body">
+
+        <form action="{% url 'clientes:novo' %}" method="POST">
+
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label">Nome</label>
+                <input class="form-control" type="text" name="nome" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Idade</label>
+                <input class="form-control" type="number" name="idade" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Telefone</label>
+                <input class="form-control" type="tel" name="telefone" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input class="form-control" type="email" name="email" required>
+            </div>
+
+            <button class="btn btn-success" type="submit">
+                Cadastrar
+            </button>
+
+            <a href="{% url 'clientes:clientes' %}" class="btn btn-secondary">
+                Voltar
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

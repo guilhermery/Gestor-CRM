@@ -1,31 +1,102 @@
-<h1>Detalhes do cliente</h1>
-<h2>{{ cliente.nome }}</h2>
-<p><strong>Email:</strong> {{ cliente.email }}</p>
-<p><strong>Telefone:</strong> {{ cliente.telefone }}</p>
-<p><strong>Idade:</strong> {{ cliente.idade }}</p>
-<hr>
-<h2>Histórico de compras</h2>
-{% if compras %}
-    {% for compra in compras %}
-        <div>
-            <p><strong>Data:</strong> {{ compra.data|date:"d/m/Y H:i" }}</p>
-            <p><strong>Valor:</strong> R$ {{ compra.valor_total|floatformat:2 }}</p>
+{% extends 'core/base.html' %}
 
-            <a href="{% url 'vendas:detalhes' compra.id %}">
-                Ver detalhes da compra
-            </a>
+{% block content %}
+
+<div class="card shadow-sm mb-4">
+
+    <div class="card-header bg-primary text-white">
+        <h3 class="mb-0">{{ cliente.nome }}</h3>
+    </div>
+
+    <div class="card-body">
+
+        <p><strong>Email:</strong> {{ cliente.email }}</p>
+        <p><strong>Telefone:</strong> {{ cliente.telefone }}</p>
+        <p><strong>Idade:</strong> {{ cliente.idade }}</p>
+
+    </div>
+
+</div>
+
+<div class="card shadow-sm">
+
+    <div class="card-header">
+        <strong>Histórico de Compras</strong>
+    </div>
+
+    <div class="card-body">
+
+    {% if compras %}
+
+        <table class="table table-striped">
+
+            <thead>
+
+                <tr>
+                    <th>Data</th>
+                    <th>Valor</th>
+                    <th></th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for compra in compras %}
+
+                <tr>
+
+                    <td>{{ compra.data_venda|date:"d/m/Y H:i" }}</td>
+
+                    <td>R$ {{ compra.valor_total|floatformat:2 }}</td>
+
+                    <td>
+
+                        <a class="btn btn-outline-primary btn-sm"
+                           href="{% url 'vendas:detalhes' compra.id %}">
+                            Ver Venda
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    {% else %}
+
+        <div class="alert alert-info">
+            Este cliente ainda não possui compras.
         </div>
 
-        <hr>
-    {% endfor %}
-{% else %}
-<p>Este cliente ainda não possui compras.</p>
-{% endif %}
-<br>
-<a href="{% url 'clientes:editar' cliente.id %}">Editar cliente</a>
-<a href="{% url 'clientes:excluir' cliente.id %}"
-   onclick="return confirm('Tem certeza que deseja excluir {{ cliente.nome }}?');">
-    Excluir cliente
-</a>
-<br><br>
-<a href="{% url 'clientes:clientes' %}">Voltar para lista de clientes</a>
+    {% endif %}
+
+    </div>
+
+</div>
+
+<div class="mt-4">
+
+    <a class="btn btn-warning"
+       href="{% url 'clientes:editar' cliente.id %}">
+        Editar
+    </a>
+
+    <a class="btn btn-danger"
+       href="{% url 'clientes:excluir' cliente.id %}"
+       onclick="return confirm('Tem certeza que deseja excluir {{ cliente.nome }}?');">
+        Excluir
+    </a>
+
+    <a class="btn btn-secondary"
+       href="{% url 'clientes:clientes' %}">
+        Voltar
+    </a>
+
+</div>
+
+{% endblock %}

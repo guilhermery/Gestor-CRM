@@ -1,33 +1,103 @@
-<h1>Registrar venda</h1>
-{% if erro %}
-    <p><strong>{{ erro }}</strong></p>
-{% endif %}
-<form action="{% url 'vendas:novo' %}" method="POST">
-    {% csrf_token %}
-    <p>
-        <label>Cliente:</label>
-        <select name="cliente">
-            {% for cliente in clientes %}
-                <option value="{{ cliente.id }}">{{ cliente.nome }}</option>
-            {% endfor %}
-        </select>
-    </p>
+{% extends 'core/base.html' %}
 
-    <p>
-        <label>Produto:</label>
-        <select name="produto">
-            {% for produto in produtos %}
-                <option value="{{ produto.id }}">{{ produto.nome }}</option>
-            {% endfor %}
-        </select>
-    </p>
+{% block content %}
 
-    <p>
-        <label>Quantidade:</label>
-        <input type="number" name="quantidade" min="1" required>
-    </p>
+<div class="card shadow-sm">
 
-    <button type="submit">Registrar venda</button>
-</form>
-<br>
-<a href="{% url 'vendas:vendas' %}">Voltar</a>
+    <div class="card-header bg-success text-white">
+
+        <h3 class="mb-0">Registrar Venda</h3>
+
+    </div>
+
+    <div class="card-body">
+
+        {% if erro %}
+
+        <div class="alert alert-danger">
+
+            {{ erro }}
+
+        </div>
+
+        {% endif %}
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Cliente
+                </label>
+
+                <select class="form-select" name="cliente">
+
+                    {% for cliente in clientes %}
+
+                        <option value="{{ cliente.id }}">
+                            {{ cliente.nome }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Produto
+                </label>
+
+                <select class="form-select" name="produto">
+
+                    {% for produto in produtos %}
+
+                        <option value="{{ produto.id }}">
+                            {{ produto.nome }}
+                        </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Quantidade
+                </label>
+
+                <input
+                    class="form-control"
+                    type="number"
+                    min="1"
+                    name="quantidade"
+                    required>
+
+            </div>
+
+            <button class="btn btn-success">
+
+                Registrar Venda
+
+            </button>
+
+            <a href="{% url 'vendas:vendas' %}"
+               class="btn btn-secondary">
+
+                Voltar
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

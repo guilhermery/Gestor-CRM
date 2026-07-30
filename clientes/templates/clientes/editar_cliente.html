@@ -1,23 +1,52 @@
-<h1>Editar cliente</h1>
-<form method="POST">
-    {% csrf_token %}
-    <p><label>Nome:</label>
-        <input type="text" name="nome" value="{{ cliente.nome }}">
-    </p>
-    
-    <p><label>Idade:</label>
-        <input type="number" name="idade" value="{{ cliente.idade }}">
-    </p>
-    
-    <p><label>Telefone:</label> 
-        <input type="tel" name="telefone" value="{{ cliente.telefone }}">
-    </p>
-    
-    <p><label>Email:</label>
-        <input type="email" name="email" value="{{ cliente.email }}">
-    </p>
-    
-    <button type="submit"> Salvar alterações </button>
-    
-    <a href="{% url 'clientes:detalhes' cliente.id %}"> Cancelar </a>
-</form>
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+<div class="card shadow-sm">
+
+    <div class="card-header bg-warning">
+        <h3 class="mb-0">Editar Cliente</h3>
+    </div>
+
+    <div class="card-body">
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label class="form-label">Nome</label>
+                <input class="form-control" type="text" name="nome" value="{{ cliente.nome }}">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Idade</label>
+                <input class="form-control" type="number" name="idade" value="{{ cliente.idade }}">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Telefone</label>
+                <input class="form-control" type="tel" name="telefone" value="{{ cliente.telefone }}">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input class="form-control" type="email" name="email" value="{{ cliente.email }}">
+            </div>
+
+            <button class="btn btn-warning">
+                Salvar Alterações
+            </button>
+
+            <a class="btn btn-secondary"
+               href="{% url 'clientes:detalhes' cliente.id %}">
+                Cancelar
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

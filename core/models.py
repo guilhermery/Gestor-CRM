@@ -1,3 +1,4 @@
 from django.db import models
-
-# Create your models here.
+from produtos.models import Produto
+from clientes.models import Cliente
+from vendas.models import Venda
